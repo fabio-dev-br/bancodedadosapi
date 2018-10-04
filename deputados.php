@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!-- ta conseguindo? -->
-<!-- para fazer comentario é so apertar ctrl k + ctrl c dpois que escreve -->
 
 <html>
     <head>
@@ -16,54 +9,52 @@ and open the template in the editor.
         <?php
         class deputados {
 
-        public static function getDeputados () {
+            public static function getDeputados() {
 
-            set_time_limit(300);
+                set_time_limit(300);
+                
+                include_once "database.php";
+                $db = database::getDB();  
+                $json_file = file_get_contents("http://dadosabertos.camara.leg.br/arquivos/deputados/json/deputados.json");   
+                $json_str = json_decode($json_file, true);
+                $itens = $json_str['dados'];        
+                
+                foreach ( $itens as $e){ 
+                
+                $uri = substr( $e['uri'],52);
+                echo $uri."<br>";
+                $nomePolitico = utf8_decode($e['nome']);
+                $idLegislaturaInicial = $e['idLegislaturaInicial'];
+                $idLegislaturaFinal = $e['idLegislaturaFinal'];
+                $nomeCivil = utf8_decode($e['nomeCivil']);      
+                $dataNascimento = $e['dataNascimento'];
+                $dataFalecimento = $e['dataFalecimento'];
+                $ufNascimento = $e['ufNascimento'];                
             
-            include_once "database.php";
-            $db = database::getDB();  
-            $json_file = file_get_contents("http://dadosabertos.camara.leg.br/arquivos/deputados/json/deputados.json");   
-            $json_str = json_decode($json_file, true);
-            $itens = $json_str['dados'];        
-            
-            foreach ( $itens as $e){ 
-            
-            $uri = substr( $e['uri'],52);
-            echo $uri."<br>";
-            $nomePolitico = utf8_decode($e['nome']);
-            $idLegislaturaInicial = $e['idLegislaturaInicial'];
-            $idLegislaturaFinal = $e['idLegislaturaFinal'];
-            $nomeCivil = utf8_decode($e['nomeCivil']);      
-            $dataNascimento = $e['dataNascimento'];
-            $dataFalecimento = $e['dataFalecimento'];
-            $ufNascimento = $e['ufNascimento'];                
-        
-            $query = 'INSERT INTO deputados
-                        (idDeputado, nomePolitico, idLegislaturaInicial, idLegislaturaFinal, 
-                        nomeCivil , dataNascimento, 
-                        dataFalecimento, ufNascimento)
-                    VALUES
-                        (:uri, :nomePolitico, :idLegislaturaInicial, :idLegislaturaFinal, 
-                        :nomeCivil , :dataNascimento, 
-                        :dataFalecimento, :ufNascimento)';
+                $query = 'INSERT INTO deputados
+                            (idDeputado, nomePolitico, idLegislaturaInicial, idLegislaturaFinal, 
+                            nomeCivil , dataNascimento,  dataFalecimento, ufNascimento)
+                        VALUES
+                            (:uri, :nomePolitico, :idLegislaturaInicial, :idLegislaturaFinal, 
+                            :nomeCivil , :dataNascimento,:dataFalecimento, :ufNascimento)';
 
-            $statement = $db->prepare($query);
+                $statement = $db->prepare($query);
 
-            $statement->bindValue(':uri', $uri);
-            $statement->bindValue(':nome', $nome);
-            $statement->bindValue(':idLegislaturaInicial', $idLegislaturaInicial);
-            $statement->bindValue(':idLegislaturaFinal', $idLegislaturaFinal);
-            $statement->bindValue(':nomeCivil', $nomeCivil);        
-            $statement->bindValue(':dataNascimento', $dataNascimento);
-            $statement->bindValue(':dataFalecimento',  $dataFalecimento);
-            $statement->bindValue(':ufNascimento', $ufNascimento);
-            
-            $statement->execute();
-            $statement->closeCursor();
-            } 
+                $statement->bindValue(':uri', $uri);
+                $statement->bindValue(':nomePolitico', $nomePolitico);
+                $statement->bindValue(':idLegislaturaInicial', $idLegislaturaInicial);
+                $statement->bindValue(':idLegislaturaFinal', $idLegislaturaFinal);
+                $statement->bindValue(':nomeCivil', $nomeCivil);        
+                $statement->bindValue(':dataNascimento', $dataNascimento);
+                $statement->bindValue(':dataFalecimento',  $dataFalecimento);
+                $statement->bindValue(':ufNascimento', $ufNascimento);
+                
+                $statement->execute();
+                $statement->closeCursor();
+                } 
+            }
         }
-    }
-    ?>    
+        ?>    
     </body>
 </html>
 
