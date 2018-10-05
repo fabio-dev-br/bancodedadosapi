@@ -16,10 +16,9 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Banco Dados Deputados Federais</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
             /* css especifico para esta view */
             html, body {
@@ -32,15 +31,28 @@ and open the template in the editor.
             }
             .content {
                 text-align: center;
-                position: absolute;
-                right: 50%;
-                top:50%;
+                margin:15%;
             }
         </style>
     </head>
-    <body>
+    <body>   
         <div class="content">
-            <a href="inicio.php" class="btn btn-large btn-primary">INICIAR</a> <hr/>
+            <a href="exc_todos.php" class="btn btn-large btn-primary">Executar Tudo</a> <hr/>
+            <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Executar separado
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="exc_orgaos.php">1-Orgãos</a></li>
+      <li><a href="exc_eventos.php">1-Eventos</a></li>
+      <li><a href="exc_legislatura.php">1-Legislatura</a></li>
+      <li><a href="exc_deputados.php">2-Deputados</a></li>
+      <li><a href="exc_participa.php">3-Participa</a></li>
+      <li><a href="exc_proposicoes.php">4-Proposições</a></li>
+      <li><a href="exc_proposicoes_autores.php">5-Proposições Autores</a></li>
+    </ul>
+  </div>
+</div>
         </div>
+        
     </body>
 </html>
